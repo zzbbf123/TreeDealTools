@@ -4,7 +4,7 @@
 
     python main.py -i intrees -cb -c clade_information.txt
 
-## 2-Generate yypermetric trees
+## 2-Generate hypermetric trees
 
     python main.py -i intrees -ht -o
 
