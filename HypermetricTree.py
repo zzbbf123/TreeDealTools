@@ -91,7 +91,7 @@ def nodeParse(treeSplit, max_branch_len):
         n += 1
     # print(d_comb)  # bipartition comb, [node1 , node2] et.al
     k.sort(key=lambda x: len(treeSplit[x][3]),
-           reverse=False)  # smaller to large : judge the level
+           reverse=False)  # smaller 
     for key in k:
         if key not in d_comb.keys():  # Terminal node
             d_comb[key] = treeSplit[key][3].copy(
@@ -101,7 +101,7 @@ def nodeParse(treeSplit, max_branch_len):
             d_comb[key][
                 1] = d_comb[key][1] + ":1"  # teminal branch length = 1
             d_comb[key].append(1)  # level
-            d_comb[key].append(1)  # edge length # chaoduliang
+            d_comb[key].append(1)  # edge length #
             if len(treeSplit[key][3]) > 2:
                 print("this node %s may be pruned, please check ! " % key)
         else:  # not teminal node
@@ -136,25 +136,21 @@ def nodeParse(treeSplit, max_branch_len):
                             2]  # change the smaller edge length  : level [key] node - level [subnode]
                 else:
                     d_comb[key].append(d_comb[d_comb[key][1]][2] + 1)
-                    d_comb[key].append(1)  # edge length # chaoduliang
+                    d_comb[key].append(1)  # edge length
                     d_comb[d_comb[key][0]][3] = d_comb[key][2] - d_comb[
                         d_comb[key][0]][
                             2]  # change the smaller edge length
-    # print(d_comb)     # 
     max_level = max([d_comb[key][2] for key in k])  #
-    # print(max_level)
     max_node = [d_comb[key] for key in k if d_comb[key][2] == max_level][0]
     scale = max_branch_len / max_level
     for key in k:
         d_comb[key].append(scale * d_comb[key][3])  # scale the edge length
-    # print(d_comb)      # 
     return d_comb, max_node, scale
 
 
 class HypermetricTree:
-
     def __init__(self, x, max_branch_len):
-        self.treeSplit = x  # define the local variants
+        self.treeSplit = x 
         self.max_branch_len = max_branch_len  
 
     def fixEdgeLength(self):  # use fix edge length  fold to 1
@@ -163,7 +159,7 @@ class HypermetricTree:
         d_comb, max_node, scale = nodeParse(treeSplit, max_branch_len)
         init_seed = ["("] + [max_node[0]] + [","] + [max_node[1]] + [
             "):" + str(max_node[3])
-        ]  # resambling , length = :
+        ]  # length = :
 
         def taowa(result):
             #result = init_seed
@@ -190,7 +186,6 @@ class HypermetricTree:
         #reassembling_t = taowa(init_seed)
         return ("".join([str(x) for x in taowa(init_seed)]) + ";")
 
-    # this function need to deal nodes brlen contain single label, multiple
     def scaledEdgeLength_notTeminal(self):  # use scaled edge len
         # resembling the tree and add scaled branch length
         # ：
@@ -199,7 +194,7 @@ class HypermetricTree:
         d_comb, max_node, scale = nodeParse(treeSplit, max_branch_len)
         init_seed = ["("] + [max_node[0]] + [","] + [max_node[1]] + [
             "):" + str(max_node[3])
-        ]  # resambling , length = : max branch length fixed to 1
+        ]  # length = : max branch length fixed to 1
 
         def taowa(result):
             #result = init_seed
