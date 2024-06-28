@@ -1,4 +1,4 @@
-# Two Usage:&#x20;
+# Two Usages:&#x20;
 
 ## 1-Calculate the number of specific partitions
 
